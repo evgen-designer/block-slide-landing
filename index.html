@@ -3,62 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keepiko - Simple home inventory app</title>
-
-    <!-- FAVICONS (The definitive, bulletproof set) -->
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" href="/images/mini-logo.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/images/mini-logo.png"> <!-- For iOS home screen icon -->
+    <title>Block Slide - Classic Puzzle</title>
     
-    <!-- META TAGS (Handles the link preview text) -->
-    <meta name="description" content="Find every item at home in secs with a home inventory app. The easiest way to organize storage & stuff in your house.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.keepiko.com/">
-    <meta property="og:title" content="Keepiko - Simple home inventory app">
-    <meta property="og:description" content="Find every item at home in secs with a home inventory app. The easiest way to organize storage & stuff in your house.">
-    <meta property="og:image" content="https://www.keepiko.com/images/keepiko-preview.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.keepiko.com/">
-    <meta name="twitter:title" content="Keepiko - Simple home inventory app">
-    <meta name="twitter:description" content="Find every item at home in secs with a home inventory app. The easiest way to organize storage & stuff in your house.">
-    <meta name="twitter:image" content="https://www.keepiko.com/images/keepiko-preview.png">
-
-    <!-- STRUCTURED DATA (Tells Google your official logo) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "url": "https://www.keepiko.com/",
-      "logo": "https://www.keepiko.com/images/mini-logo.png"
-    }
-    </script>
-
     <style>
-        /* --- Base & Fonts --- */
+        /* --- RESET & VARIABLES --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            /* Palette based on SwiftUI Code */
+            --bg-color: #0f172a; /* Slate 900 - Dark BG */
+            --text-color: #ffffff;
+            --nav-bg: rgba(255, 255, 255, 0.1);
+            
+            /* Button Colors */
+            --btn-top: #22c55e;
+            --btn-bottom: #166534;
+            
+            /* Block Colors (Blue Palette) */
+            --block-base: #3b82f6;
+            --block-light: #60a5fa;
+            --block-shadow: #1e40af;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #FF8FAB;
-            color: #fff;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             overflow-x: hidden;
-            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
+
+        /* --- BACKGROUND CANVAS --- */
+        #game-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Behind everything */
+            opacity: 0.15; /* Matching SwiftUI .opacity(0.15) */
+            pointer-events: none;
+        }
+
         .page-wrapper {
             max-width: 1440px;
+            width: 100%;
             margin: 0 auto;
             padding: 0 40px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
             position: relative;
             z-index: 5;
         }
 
-        /* --- DESKTOP STYLES (Default) --- */
+        /* --- HEADER (From Keepiko Ref) --- */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 25px;
             margin-top: 20px;
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(10px);
             border-radius: 16px;
         }
         .logo-area {
@@ -66,234 +75,302 @@
             align-items: center;
             gap: 12px;
             font-size: 16px;
-            font-weight: 500;
-            color: #111;
-            text-decoration: none;
-        }
-        .logo-area img { height: 32px; }
-        nav { display: flex; gap: 30px; }
-        nav a {
-            text-decoration: none;
-            color: #111;
-            font-weight: 500;
-            font-size: 16px;
-            transition: color 0.2s;
-        }
-        nav a:hover { color: #000; }
-        main {
-            display: flex;
-            align-items: center;
-            padding: 60px 0;
-            min-height: calc(100vh - 170px);
-        }
-        .hero-text { flex-basis: 50%; }
-        .hero-text h1 {
-            font-size: 80px;
             font-weight: 700;
-            line-height: 85%;
-            margin-bottom: 40px;
+            color: #fff;
+            text-decoration: none;
+        }
+        /* CSS Logo Placeholder */
+        .mini-logo {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--btn-top), var(--block-base));
+            border-radius: 6px;
         }
         
-        /* CUSTOM APP STORE BUTTON STYLES */
-        .app-store-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background-color: #2563EB; /* CHANGED */
-            color: #fff;
-            padding: 16px 32px; /* CHANGED */
-            border-radius: 9999px; /* CHANGED */
+        nav.desktop-nav { display: flex; gap: 30px; }
+        nav.desktop-nav a {
             text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            color: #fff;
+            font-weight: 500;
+            font-size: 16px;
+            opacity: 0.9;
+            transition: opacity 0.2s;
         }
-        .app-store-button:hover {
-            transform: translateY(-2px);
-        }
-        .app-store-logo {
-            font-size: 36px; /* Adjusted size */
-            line-height: 1;
-        }
-        .app-store-text {
+        nav.desktop-nav a:hover { opacity: 1; text-decoration: underline; }
+
+        /* --- MAIN CONTENT (Game Entry) --- */
+        main {
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            line-height: 1.2;
-        }
-        .app-store-text-top {
-            font-size: 11px; /* Adjusted size */
-            font-weight: 400;
-        }
-        .app-store-text-bottom {
-            font-size: 20px;
-            font-weight: 500;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 60px;
+            padding-bottom: 100px;
         }
 
-        .hero-images { flex-basis: 50%; }
-        .illustration, .illustration-group { position: absolute; pointer-events: none; }
-        .illustration-group {
-            position: absolute; right: 0; bottom: 0;
-            width: 580px; height: 520px; z-index: 1;
+        /* Main Game Logo */
+        .game-logo {
+            max-width: 300px;
+            width: 80%;
+            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.4));
         }
-        .iphone-illustration {
-            width: 385px; position: absolute; right: 0; bottom: 0; z-index: 2;
+
+        /* The Green Start Button */
+        .game-button {
+            position: relative;
+            width: 200px;
+            height: 80px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.1s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-decoration: none;
+            display: inline-block;
         }
-        .dialog-bubble {
-            width: 280px; right: 200px; bottom: 330px; z-index: 3;
+
+        .game-button:active {
+            transform: scale(0.95);
         }
-        .dialog-text {
-            color: #111; font-weight: 500; font-size: 18px;
-            right: 230px; bottom: 365px; z-index: 4; white-space: nowrap;
+
+        .btn-layer-bottom {
+            position: absolute;
+            top: 6px; left: 0; right: 0; bottom: -6px;
+            background-color: var(--btn-bottom);
+            border-radius: 24px;
         }
-        .where-guy {
-            width: 230px; position: absolute; left: 0; bottom: 0; z-index: 1;
+
+        .btn-layer-top {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--btn-top);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
+
+        /* --- FOOTER & MOBILE --- */
         footer {
-            padding: 40px 0 20px 0; font-size: 14px; color: #000; font-weight: 400;
+            padding: 40px 0 20px 0;
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            text-align: center;
         }
-        .footer-divider {
-            border: 0; height: 1px; background-color: rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px; max-width: 440px; margin-left: 0;
-        }
-        .mobile-only, .header-text-mobile { display: none; }
+        
+        .mobile-nav { display: none; }
 
-        @media (min-width: 1025px) {
-             main, footer { padding-left: 80px; }
-        }
-
-        @media (max-width: 1024px) {
+        @media (max-width: 768px) {
             .page-wrapper { padding: 0 20px; }
-            header {
-                background-color: rgba(255, 255, 255, 0.2);
-                border-radius: 16px;
-                padding: 15px 25px;
-                justify-content: center;
-                margin-top: 25px;
-            }
-            .logo-area span { color: #111; }
-            .header-text-desktop { display: none; }
-            .header-text-mobile { display: inline; }
             nav.desktop-nav { display: none; }
-
-            main {
-                flex-direction: column; text-align: center;
-                padding-top: 40px; padding-bottom: 0;
-                min-height: auto; gap: 20px;
-            }
-            .hero-text { flex-basis: auto; }
-            .hero-text h1 { font-size: 48px; }
-            .hero-images, .illustration, .illustration-group { display: none; }
-            
-            .mobile-only { display: block; }
-            
-            .mobile-illustration-container {
-                position: relative; width: 100%;
-                height: 380px;
-            }
-            .mobile-illustration-container .illustration { display: block !important; position: absolute; }
-            .mobile-iphone { width: 280px; right: -20px; bottom: 0; z-index: 2; }
-            
-            .mobile-where-guy-mask {
-                width: 220px;
-                height: 220px;
-                background-color: #FF8FAB;
-                border-radius: 50%;
-                position: absolute;
-                right: 155px;
-                bottom: 180px;
-                z-index: 1;
-                overflow: hidden;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            .mobile-where-guy-mask img {
-                width: 68%;
-                height: auto;
-                position: relative;
-                top: 60px;
-                left: 32px;
-            }
+            header { justify-content: center; }
             
             .mobile-nav {
-                display: flex; justify-content: center; gap: 30px;
-                padding: 15px 25px;
-                background-color: rgba(255, 255, 255, 0.2);
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                padding: 15px;
+                background-color: var(--nav-bg);
                 border-radius: 16px;
+                margin-bottom: 20px;
             }
-            .mobile-nav a { 
-                color: #111; 
-                font-weight: 500; 
-                text-decoration: none; 
-                font-size: 14px;
-            }
-            
-            footer { padding: 20px 0; text-align: center; }
-            .footer-divider { display: none; }
-            footer p { color: #000; }
+            .mobile-nav a { color: #fff; text-decoration: none; font-size: 14px; }
         }
     </style>
-
-    <!-- Your Analytics Scripts in Head -->
-    <script type="text/javascript"> (function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)}; t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i; y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y); })(window, document, "clarity", "script", "snxmk8dbb2"); </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QMQ205WG9P"></script>
-    <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-QMQ205WG9P'); </script>
 </head>
 <body>
+
+    <!-- 1. Background Canvas -->
+    <canvas id="game-background"></canvas>
+
     <div class="page-wrapper">
+        <!-- 2. Header -->
         <header>
-            <a href="/" class="logo-area">
-                <img src="https://www.keepiko.com/images/mini-logo.svg" alt="Keepiko Logo">
-                <span class="header-text-desktop">Keepiko - Simple home inventory app</span>
-                <span class="header-text-mobile">Keepiko - Simple home inventory</span>
+            <a href="index.html" class="logo-area">
+                <div class="mini-logo"></div>
+                <span>Block Slide</span>
             </a>
             <nav class="desktop-nav">
-                <a href="/support">Contact us</a>
-                <a href="/terms">Terms</a>
-                <a href="/privacy">Privacy</a>
+                <a href="support.html">Contact</a>
+                <a href="terms.html">Terms</a>
+                <a href="privacy.html">Privacy</a>
             </nav>
         </header>
 
+        <!-- 3. Main Content -->
         <main>
-            <div class="hero-text">
-                <h1>Find every item at home in secs</h1>
-                <!-- CTA UPDATED FOR APP LAUNCH -->
-                <a href="https://apps.apple.com/pt/app/home-inventory-keepiko/id6743376808?l=en-GB" class="app-store-button" onclick="gtag('event', 'app_store_click');" target="_blank" rel="noopener noreferrer">
-                    <span class="app-store-logo"></span>
-                    <div class="app-store-text">
-                        <span class="app-store-text-top">Download on the</span>
-                        <span class="app-store-text-bottom">App Store</span>
-                    </div>
-                </a>
-            </div>
-            <div class="hero-images"><!-- Spacer --></div>
+            <!-- Logo Placeholder (Replace src with actual logo) -->
+            <img src="images/block-slide-logo.png" 
+                 onerror="this.style.display='none'; document.getElementById('logo-text').style.display='block'" 
+                 alt="Block Slide Logo" class="game-logo">
             
-            <div class="mobile-only mobile-illustration-container">
-                <div class="illustration mobile-where-guy-mask">
-                    <img src="https://www.keepiko.com/images/where-guy.svg" alt="">
+            <!-- Fallback text if no image -->
+            <h1 id="logo-text" style="display:none; font-size: 60px; font-weight: 900; text-shadow: 0 10px 20px rgba(0,0,0,0.5);">
+                BLOCK<br>SLIDE
+            </h1>
+
+            <!-- Start Button -->
+            <button class="game-button" onclick="startTutorial()">
+                <div class="btn-layer-bottom"></div>
+                <div class="btn-layer-top">
+                    <!-- Infinity Icon SVG -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 1 0 0-8c-2 0-4 1.33-6 4Z"></path>
+                    </svg>
+                    <span>Classic</span>
                 </div>
-                <img src="https://www.keepiko.com/images/iphone-illustration.svg" alt="" class="illustration mobile-iphone">
-            </div>
+            </button>
         </main>
-        
-        <nav class="mobile-only mobile-nav">
-            <a href="/support">Contact us</a>
-            <a href="/terms">Terms</a>
-            <a href="/privacy">Privacy</a>
+
+        <!-- Mobile Nav -->
+        <nav class="mobile-nav">
+            <a href="support.html">Contact</a>
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
         </nav>
 
         <footer>
-            <hr class="footer-divider">
-            <p>© 2025 Keepiko. All rights reserved.</p>
+            <p>© 2026 Block Slide. All rights reserved.</p>
         </footer>
     </div>
 
-    <!-- These illustrations are FOR DESKTOP ONLY -->
-    <p class="illustration dialog-text">Where is my lucky scarf 😩</p>
-    <img src="https://www.keepiko.com/images/dialog-bubble.svg" alt="Dialog bubble" class="illustration dialog-bubble">
-    <div class="illustration-group">
-        <img src="https://www.keepiko.com/images/where-guy.svg" alt="Confused person" class="illustration where-guy">
-        <img src="https://www.keepiko.com/images/iphone-illustration.svg" alt="iPhone showing Keepiko app" class="illustration iphone-illustration">
-    </div>
+    <script>
+        // --- GAME ENGINE LOGIC (Visuals Only) ---
+        
+        const canvas = document.getElementById('game-background');
+        const ctx = canvas.getContext('2d');
+        const TETROMINOS = {
+            'I': [[1, 1, 1, 1]],
+            'J': [[1, 0, 0], [1, 1, 1]],
+            'L': [[0, 0, 1], [1, 1, 1]],
+            'O': [[1, 1], [1, 1]],
+            'S': [[0, 1, 1], [1, 1, 0]],
+            'T': [[0, 1, 0], [1, 1, 1]],
+            'Z': [[1, 1, 0], [0, 1, 1]]
+        };
+        const SHAPE_KEYS = Object.keys(TETROMINOS);
+        
+        let figures = [];
+        const BLOCK_SIZE = 30; // Scaled up for web visibility
+        const SPACING = 20;
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            generateFigures();
+            draw();
+        }
+
+        function generateFigures() {
+            figures = [];
+            const maxX = canvas.width;
+            const maxY = canvas.height;
+
+            // Try to place up to 20 figures
+            for (let i = 0; i < 20; i++) {
+                const shapeName = SHAPE_KEYS[Math.floor(Math.random() * SHAPE_KEYS.length)];
+                const matrix = TETROMINOS[shapeName];
+                
+                const rows = matrix.length;
+                const cols = matrix[0].length;
+                const figW = cols * BLOCK_SIZE;
+                const figH = rows * BLOCK_SIZE;
+
+                // 50 attempts per shape
+                for (let attempt = 0; attempt < 50; attempt++) {
+                    const randX = Math.random() * (maxX - figW - SPACING) + SPACING/2;
+                    const randY = Math.random() * (maxY - figH - SPACING) + SPACING/2;
+
+                    // Check collision
+                    let collision = false;
+                    for (let f of figures) {
+                        // Inflate rect by spacing for buffer
+                        if (
+                            randX < f.x + f.w + SPACING &&
+                            randX + figW + SPACING > f.x &&
+                            randY < f.y + f.h + SPACING &&
+                            randY + figH + SPACING > f.y
+                        ) {
+                            collision = true;
+                            break;
+                        }
+                    }
+
+                    if (!collision) {
+                        figures.push({ matrix, x: randX, y: randY, w: figW, h: figH });
+                        break;
+                    }
+                }
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Colors from CSS variables
+            const cBase = '#3b82f6';
+            const cLight = '#60a5fa';
+            const cShadow = '#1e40af';
+
+            figures.forEach(fig => {
+                const matrix = fig.matrix;
+                for(let r=0; r<matrix.length; r++) {
+                    for(let c=0; c<matrix[0].length; c++) {
+                        if(matrix[r][c] === 1) {
+                            const bx = fig.x + (c * BLOCK_SIZE);
+                            const by = fig.y + (r * BLOCK_SIZE);
+                            const gap = 1;
+                            const size = BLOCK_SIZE - (gap * 2);
+                            
+                            // 1. Base
+                            ctx.fillStyle = cBase;
+                            ctx.fillRect(bx + gap, by + gap, size, size);
+
+                            // 2. Light Bevel (Top/Left)
+                            ctx.fillStyle = cLight;
+                            ctx.beginPath();
+                            ctx.moveTo(bx + gap, by + gap + size);
+                            ctx.lineTo(bx + gap, by + gap);
+                            ctx.lineTo(bx + gap + size, by + gap);
+                            ctx.lineTo(bx + gap + size - 4, by + gap + 4);
+                            ctx.lineTo(bx + gap + 4, by + gap + 4);
+                            ctx.lineTo(bx + gap + 4, by + gap + size - 4);
+                            ctx.fill();
+
+                            // 3. Shadow Bevel (Bottom/Right)
+                            ctx.fillStyle = cShadow;
+                            ctx.beginPath();
+                            ctx.moveTo(bx + gap + size, by + gap);
+                            ctx.lineTo(bx + gap + size, by + gap + size);
+                            ctx.lineTo(bx + gap, by + gap + size);
+                            ctx.lineTo(bx + gap + 4, by + gap + size - 4);
+                            ctx.lineTo(bx + gap + size - 4, by + gap + size - 4);
+                            ctx.lineTo(bx + gap + size - 4, by + gap + 4);
+                            ctx.fill();
+
+                            // 4. Center Face
+                            ctx.fillStyle = cBase;
+                            ctx.fillRect(bx + gap + 4, by + gap + 4, size - 8, size - 8);
+                        }
+                    }
+                }
+            });
+        }
+
+        function startTutorial() {
+            // Animation effect for button click
+            console.log("Starting Game/Tutorial...");
+            // Redirect to app store or trigger logic
+        }
+
+        window.addEventListener('resize', resize);
+        resize(); // Init
+    </script>
 </body>
 </html>
