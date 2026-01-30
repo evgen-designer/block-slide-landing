@@ -3,76 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - Keepiko</title>
-    <link rel="icon" href="https://www.keepiko.com/images/mini-logo.svg">
+    <title>Terms of Service - Block Slide</title>
+    <!-- Reusing the style from Privacy to keep files standalone as requested -->
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #111; background-color: #FF8FAB; margin: 0; }
-        .page-wrapper { max-width: 1440px; margin: 0 auto; padding: 0 40px; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; margin-top: 20px; background-color: rgba(255, 255, 255, 0.2); border-radius: 16px; }
-        .logo-area { display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 500; color: #111; text-decoration: none; }
-        .logo-area img { height: 32px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; background-color: #0f172a; color: #e2e8f0; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+        .page-wrapper { max-width: 1440px; margin: 0 auto; padding: 0 40px; width: 100%; flex-grow: 1; display: flex; flex-direction: column;}
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; margin-top: 20px; background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 16px; }
+        .logo-area { display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 700; color: #fff; text-decoration: none; }
+        .mini-logo { width: 32px; height: 32px; background: linear-gradient(135deg, #22c55e, #3b82f6); border-radius: 6px; }
         nav { display: flex; gap: 30px; }
-        nav a { text-decoration: none; color: #111; font-weight: 500; font-size: 16px; }
-        .content { max-width: 800px; margin: 40px auto; padding: 40px; background-color: rgba(255, 255, 255, 0.75); border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1 { margin-bottom: 30px; }
-        h2 { margin-top: 40px; }
-        p { margin-bottom: 20px; }
-        .content a { color: #3b82f6; text-decoration: underline; }
-        footer { padding: 20px 0; font-size: 14px; color: #111; font-weight: 400; text-align: center; }
-        .mobile-only, .header-text-mobile { display: none; }
-        @media (max-width: 1024px) {
+        nav a { text-decoration: none; color: #fff; font-weight: 500; font-size: 16px; opacity: 0.9; }
+        nav a:hover { opacity: 1; text-decoration: underline; }
+        .content { max-width: 800px; margin: 40px auto; padding: 40px; background-color: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        h1 { margin-bottom: 30px; color: #fff; }
+        h2 { margin-top: 40px; color: #fff; }
+        p { margin-bottom: 20px; color: #cbd5e1; }
+        a.text-link { color: #60a5fa; text-decoration: underline; }
+        footer { padding: 20px 0; font-size: 14px; color: rgba(255,255,255,0.5); text-align: center; margin-top: auto; }
+        .mobile-only { display: none; }
+        @media (max-width: 768px) {
             .page-wrapper { padding: 0 20px; }
-            header { justify-content: center; margin-top: 25px; }
-            .header-text-desktop { display: none; }
-            .header-text-mobile { display: inline; }
+            header { justify-content: center; }
             nav.desktop-nav { display: none; }
             .mobile-only { display: block; }
-            .mobile-nav { display: flex; justify-content: center; gap: 30px; padding: 15px 25px; margin: 20px 0; background-color: rgba(255, 255, 255, 0.2); border-radius: 16px; }
-            .mobile-nav a { font-size: 14px; }
-            footer p { color: #111; }
+            .mobile-nav { display: flex; justify-content: center; gap: 30px; padding: 15px 25px; margin: 20px 0; background-color: rgba(255, 255, 255, 0.1); border-radius: 16px; }
+            .content { padding: 25px; margin: 20px 0; }
         }
     </style>
-    <!-- Analytics -->
-    <script type="text/javascript"> (function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)}; t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i; y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y); })(window, document, "clarity", "script", "snxmk8dbb2"); </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QMQ205WG9P"></script>
-    <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-QMQ205WG9P'); </script>
 </head>
 <body>
     <div class="page-wrapper">
         <header>
-            <a href="/" class="logo-area">
-                <img src="https://www.keepiko.com/images/mini-logo.svg" alt="Keepiko Logo">
-                <span class="header-text-desktop">Keepiko - Simple home inventory app</span>
-                <span class="header-text-mobile">Keepiko - Simple home inventory</span>
+            <a href="index.html" class="logo-area">
+                <div class="mini-logo"></div>
+                <span>Block Slide</span>
             </a>
             <nav class="desktop-nav">
-                <a href="/support">Contact us</a>
-                <a href="/terms">Terms</a>
-                <a href="/privacy">Privacy</a>
+                <a href="support.html">Contact</a>
+                <a href="terms.html">Terms</a>
+                <a href="privacy.html">Privacy</a>
             </nav>
         </header>
+
         <div class="content">
             <h1>Terms of Service</h1>
-            <h2>My Agreement With You</h2>
-            <p>Thanks for using Keepiko! My name is IEVGEN KUZNIETSOV, and I created this app. These terms are a simple agreement between you (the user) and me. When you use Keepiko, you're agreeing to these terms.</p>
-            <p>Your use of Keepiko is also covered by Apple's standard End User License Agreement (EULA), which you agree to when you download apps from the App Store.</p>
-            <h2>Keepiko Plus Subscriptions & Purchases</h2>
-            <p>Keepiko is free to download and use with certain limits. You can unlock unlimited use by purchasing Keepiko Plus.</p>
-            <p><strong>Subscriptions (Weekly, Monthly, Yearly):</strong> Payment will be charged to your Apple ID account at the confirmation of purchase. Subscriptions automatically renew unless they are canceled at least 24 hours before the end of the current period.</p>
-            <p><strong>Lifetime Purchase:</strong> This is a one-time payment and does not renew.</p>
-            <p><strong>Managing Subscriptions:</strong> You can manage and cancel your subscriptions at any time by going to your App Store account settings after purchase.</p>
+            <h2>Agreement</h2>
+            <p>Thanks for playing Block Slide! By downloading or using the app, these terms will automatically apply to you.</p>
+            <p>Your use of Block Slide is also covered by Apple's standard End User License Agreement (EULA).</p>
+
+            <h2>Purchases</h2>
+            <p>Block Slide is free to play. Some items or features may be available for purchase. Payment will be charged to your Apple ID account at the confirmation of purchase.</p>
+            
             <h2>Your Privacy</h2>
-            <p>I take your privacy seriously. How I handle your data is explained in my <a href="/privacy">Privacy Policy</a>, which is part of this agreement.</p>
-            <p><em>Last updated: August 16, 2025</em></p>
+            <p>I take your privacy seriously. How I handle your data is explained in my <a href="privacy.html" class="text-link">Privacy Policy</a>.</p>
+            
+            <h2>Modifications</h2>
+            <p>I reserve the right to make changes to the app or to charge for its services, at any time and for any reason. I will never charge you for the app or its services without making it very clear to you exactly what you're paying for.</p>
+
+            <p><em>Last updated: January 2026</em></p>
         </div>
+
         <nav class="mobile-only mobile-nav">
-            <a href="/support">Contact us</a>
-            <a href="/terms">Terms</a>
-            <a href="/privacy">Privacy</a>
+            <a href="support.html">Contact</a>
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
         </nav>
+
         <footer>
-            <p>© 2025 Keepiko. All rights reserved.</p>
+            <p>© 2026 Block Slide. All rights reserved.</p>
         </footer>
     </div>
 </body>
