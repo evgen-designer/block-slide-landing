@@ -10,16 +10,11 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
-            /* Palette based on SwiftUI Code */
-            --bg-color: #0f172a; /* Slate 900 - Dark BG */
+            --bg-color: #0f172a;
             --text-color: #ffffff;
             --nav-bg: rgba(255, 255, 255, 0.1);
-            
-            /* Button Colors */
             --btn-top: #22c55e;
             --btn-bottom: #166534;
-            
-            /* Block Colors (Blue Palette) */
             --block-base: #3b82f6;
             --block-light: #60a5fa;
             --block-shadow: #1e40af;
@@ -42,8 +37,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Behind everything */
-            opacity: 0.15; /* Matching SwiftUI .opacity(0.15) */
+            z-index: -1;
+            opacity: 0.15;
             pointer-events: none;
         }
 
@@ -59,7 +54,7 @@
             z-index: 5;
         }
 
-        /* --- HEADER (From Keepiko Ref) --- */
+        /* --- HEADER --- */
         header {
             display: flex;
             justify-content: space-between;
@@ -79,7 +74,6 @@
             color: #fff;
             text-decoration: none;
         }
-        /* CSS Logo Placeholder */
         .mini-logo {
             width: 32px;
             height: 32px;
@@ -98,7 +92,7 @@
         }
         nav.desktop-nav a:hover { opacity: 1; text-decoration: underline; }
 
-        /* --- MAIN CONTENT (Game Entry) --- */
+        /* --- MAIN CONTENT --- */
         main {
             flex-grow: 1;
             display: flex;
@@ -110,14 +104,20 @@
             padding-bottom: 100px;
         }
 
-        /* Main Game Logo */
+        /* LOGO IMAGE STYLE */
         .game-logo {
-            max-width: 300px;
-            width: 80%;
-            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.4));
+            max-width: 350px;
+            width: 90%;
+            height: auto;
+            /* Adds a subtle drop shadow to pop against the dark bg */
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+            transition: transform 0.3s ease;
+        }
+        .game-logo:hover {
+            transform: scale(1.02);
         }
 
-        /* The Green Start Button */
+        /* GREEN BUTTON */
         .game-button {
             position: relative;
             width: 200px;
@@ -197,7 +197,8 @@
                 <span>Block Slide</span>
             </a>
             <nav class="desktop-nav">
-                <a href="support.html">Contact</a>
+                <!-- UPDATED LINKS -->
+                <a href="contact.html">Contact</a>
                 <a href="terms.html">Terms</a>
                 <a href="privacy.html">Privacy</a>
             </nav>
@@ -205,21 +206,15 @@
 
         <!-- 3. Main Content -->
         <main>
-            <!-- Logo Placeholder (Replace src with actual logo) -->
-            <img src="images/block-slide-logo.png" 
-                 onerror="this.style.display='none'; document.getElementById('logo-text').style.display='block'" 
-                 alt="Block Slide Logo" class="game-logo">
-            
-            <!-- Fallback text if no image -->
-            <h1 id="logo-text" style="display:none; font-size: 60px; font-weight: 900; text-shadow: 0 10px 20px rgba(0,0,0,0.5);">
-                BLOCK<br>SLIDE
-            </h1>
+            <!-- UPDATED LOGO IMAGE -->
+            <img src="block-slide-logo.png" 
+                 alt="Block Slide Logo" 
+                 class="game-logo">
 
             <!-- Start Button -->
             <button class="game-button" onclick="startTutorial()">
                 <div class="btn-layer-bottom"></div>
                 <div class="btn-layer-top">
-                    <!-- Infinity Icon SVG -->
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 1 0 0-8c-2 0-4 1.33-6 4Z"></path>
                     </svg>
@@ -230,7 +225,7 @@
 
         <!-- Mobile Nav -->
         <nav class="mobile-nav">
-            <a href="support.html">Contact</a>
+            <a href="contact.html">Contact</a>
             <a href="terms.html">Terms</a>
             <a href="privacy.html">Privacy</a>
         </nav>
@@ -240,9 +235,8 @@
         </footer>
     </div>
 
+    <!-- Script to draw the background blocks -->
     <script>
-        // --- GAME ENGINE LOGIC (Visuals Only) ---
-        
         const canvas = document.getElementById('game-background');
         const ctx = canvas.getContext('2d');
         const TETROMINOS = {
@@ -257,7 +251,7 @@
         const SHAPE_KEYS = Object.keys(TETROMINOS);
         
         let figures = [];
-        const BLOCK_SIZE = 30; // Scaled up for web visibility
+        const BLOCK_SIZE = 30; 
         const SPACING = 20;
 
         function resize() {
@@ -272,7 +266,6 @@
             const maxX = canvas.width;
             const maxY = canvas.height;
 
-            // Try to place up to 20 figures
             for (let i = 0; i < 20; i++) {
                 const shapeName = SHAPE_KEYS[Math.floor(Math.random() * SHAPE_KEYS.length)];
                 const matrix = TETROMINOS[shapeName];
@@ -282,15 +275,12 @@
                 const figW = cols * BLOCK_SIZE;
                 const figH = rows * BLOCK_SIZE;
 
-                // 50 attempts per shape
                 for (let attempt = 0; attempt < 50; attempt++) {
                     const randX = Math.random() * (maxX - figW - SPACING) + SPACING/2;
                     const randY = Math.random() * (maxY - figH - SPACING) + SPACING/2;
 
-                    // Check collision
                     let collision = false;
                     for (let f of figures) {
-                        // Inflate rect by spacing for buffer
                         if (
                             randX < f.x + f.w + SPACING &&
                             randX + figW + SPACING > f.x &&
@@ -312,8 +302,6 @@
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Colors from CSS variables
             const cBase = '#3b82f6';
             const cLight = '#60a5fa';
             const cShadow = '#1e40af';
@@ -328,11 +316,9 @@
                             const gap = 1;
                             const size = BLOCK_SIZE - (gap * 2);
                             
-                            // 1. Base
                             ctx.fillStyle = cBase;
                             ctx.fillRect(bx + gap, by + gap, size, size);
 
-                            // 2. Light Bevel (Top/Left)
                             ctx.fillStyle = cLight;
                             ctx.beginPath();
                             ctx.moveTo(bx + gap, by + gap + size);
@@ -343,7 +329,6 @@
                             ctx.lineTo(bx + gap + 4, by + gap + size - 4);
                             ctx.fill();
 
-                            // 3. Shadow Bevel (Bottom/Right)
                             ctx.fillStyle = cShadow;
                             ctx.beginPath();
                             ctx.moveTo(bx + gap + size, by + gap);
@@ -354,7 +339,6 @@
                             ctx.lineTo(bx + gap + size - 4, by + gap + 4);
                             ctx.fill();
 
-                            // 4. Center Face
                             ctx.fillStyle = cBase;
                             ctx.fillRect(bx + gap + 4, by + gap + 4, size - 8, size - 8);
                         }
@@ -364,13 +348,12 @@
         }
 
         function startTutorial() {
-            // Animation effect for button click
-            console.log("Starting Game/Tutorial...");
-            // Redirect to app store or trigger logic
+            // Placeholder for game start
+            console.log("Game Start");
         }
 
         window.addEventListener('resize', resize);
-        resize(); // Init
+        resize();
     </script>
 </body>
 </html>
