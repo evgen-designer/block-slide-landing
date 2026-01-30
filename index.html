@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keepiko - Simple home inventory app</title>
+
+    <!-- FAVICONS (The definitive, bulletproof set) -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/images/mini-logo.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/images/mini-logo.png"> <!-- For iOS home screen icon -->
+    
+    <!-- META TAGS (Handles the link preview text) -->
+    <meta name="description" content="Find every item at home in secs with a home inventory app. The easiest way to organize storage & stuff in your house.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.keepiko.com/">
+    <meta property="og:title" content="Keepiko - Simple home inventory app">
+    <meta property="og:description" content="Find every item at home in secs with a home inventory app. The easiest way to organize storage & stuff in your house.">
+    <meta property="og:image" content="https://www.keepiko.com/images/keepiko-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.keepiko.com/">
+    <meta name="twitter:title" content="Keepiko - Simple home inventory app">
+    <meta name="twitter:description" content="Find every item at home in secs with a home inventory app. The easiest way to organize storage & stuff in your house.">
+    <meta name="twitter:image" content="https://www.keepiko.com/images/keepiko-preview.png">
+
+    <!-- STRUCTURED DATA (Tells Google your official logo) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "https://www.keepiko.com/",
+      "logo": "https://www.keepiko.com/images/mini-logo.png"
+    }
+    </script>
+
+    <style>
+        /* --- Base & Fonts --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #FF8FAB;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .page-wrapper {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* --- DESKTOP STYLES (Default) --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #111;
+            text-decoration: none;
+        }
+        .logo-area img { height: 32px; }
+        nav { display: flex; gap: 30px; }
+        nav a {
+            text-decoration: none;
+            color: #111;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+        nav a:hover { color: #000; }
+        main {
+            display: flex;
+            align-items: center;
+            padding: 60px 0;
+            min-height: calc(100vh - 170px);
+        }
+        .hero-text { flex-basis: 50%; }
+        .hero-text h1 {
+            font-size: 80px;
+            font-weight: 700;
+            line-height: 85%;
+            margin-bottom: 40px;
+        }
+        
+        /* CUSTOM APP STORE BUTTON STYLES */
+        .app-store-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background-color: #2563EB; /* CHANGED */
+            color: #fff;
+            padding: 16px 32px; /* CHANGED */
+            border-radius: 9999px; /* CHANGED */
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .app-store-button:hover {
+            transform: translateY(-2px);
+        }
+        .app-store-logo {
+            font-size: 36px; /* Adjusted size */
+            line-height: 1;
+        }
+        .app-store-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.2;
+        }
+        .app-store-text-top {
+            font-size: 11px; /* Adjusted size */
+            font-weight: 400;
+        }
+        .app-store-text-bottom {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .hero-images { flex-basis: 50%; }
+        .illustration, .illustration-group { position: absolute; pointer-events: none; }
+        .illustration-group {
+            position: absolute; right: 0; bottom: 0;
+            width: 580px; height: 520px; z-index: 1;
+        }
+        .iphone-illustration {
+            width: 385px; position: absolute; right: 0; bottom: 0; z-index: 2;
+        }
+        .dialog-bubble {
+            width: 280px; right: 200px; bottom: 330px; z-index: 3;
+        }
+        .dialog-text {
+            color: #111; font-weight: 500; font-size: 18px;
+            right: 230px; bottom: 365px; z-index: 4; white-space: nowrap;
+        }
+        .where-guy {
+            width: 230px; position: absolute; left: 0; bottom: 0; z-index: 1;
+        }
+        footer {
+            padding: 40px 0 20px 0; font-size: 14px; color: #000; font-weight: 400;
+        }
+        .footer-divider {
+            border: 0; height: 1px; background-color: rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px; max-width: 440px; margin-left: 0;
+        }
+        .mobile-only, .header-text-mobile { display: none; }
+
+        @media (min-width: 1025px) {
+             main, footer { padding-left: 80px; }
+        }
+
+        @media (max-width: 1024px) {
+            .page-wrapper { padding: 0 20px; }
+            header {
+                background-color: rgba(255, 255, 255, 0.2);
+                border-radius: 16px;
+                padding: 15px 25px;
+                justify-content: center;
+                margin-top: 25px;
+            }
+            .logo-area span { color: #111; }
+            .header-text-desktop { display: none; }
+            .header-text-mobile { display: inline; }
+            nav.desktop-nav { display: none; }
+
+            main {
+                flex-direction: column; text-align: center;
+                padding-top: 40px; padding-bottom: 0;
+                min-height: auto; gap: 20px;
+            }
+            .hero-text { flex-basis: auto; }
+            .hero-text h1 { font-size: 48px; }
+            .hero-images, .illustration, .illustration-group { display: none; }
+            
+            .mobile-only { display: block; }
+            
+            .mobile-illustration-container {
+                position: relative; width: 100%;
+                height: 380px;
+            }
+            .mobile-illustration-container .illustration { display: block !important; position: absolute; }
+            .mobile-iphone { width: 280px; right: -20px; bottom: 0; z-index: 2; }
+            
+            .mobile-where-guy-mask {
+                width: 220px;
+                height: 220px;
+                background-color: #FF8FAB;
+                border-radius: 50%;
+                position: absolute;
+                right: 155px;
+                bottom: 180px;
+                z-index: 1;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .mobile-where-guy-mask img {
+                width: 68%;
+                height: auto;
+                position: relative;
+                top: 60px;
+                left: 32px;
+            }
+            
+            .mobile-nav {
+                display: flex; justify-content: center; gap: 30px;
+                padding: 15px 25px;
+                background-color: rgba(255, 255, 255, 0.2);
+                border-radius: 16px;
+            }
+            .mobile-nav a { 
+                color: #111; 
+                font-weight: 500; 
+                text-decoration: none; 
+                font-size: 14px;
+            }
+            
+            footer { padding: 20px 0; text-align: center; }
+            .footer-divider { display: none; }
+            footer p { color: #000; }
+        }
+    </style>
+
+    <!-- Your Analytics Scripts in Head -->
+    <script type="text/javascript"> (function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)}; t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i; y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y); })(window, document, "clarity", "script", "snxmk8dbb2"); </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QMQ205WG9P"></script>
+    <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-QMQ205WG9P'); </script>
+</head>
+<body>
+    <div class="page-wrapper">
+        <header>
+            <a href="/" class="logo-area">
+                <img src="https://www.keepiko.com/images/mini-logo.svg" alt="Keepiko Logo">
+                <span class="header-text-desktop">Keepiko - Simple home inventory app</span>
+                <span class="header-text-mobile">Keepiko - Simple home inventory</span>
+            </a>
+            <nav class="desktop-nav">
+                <a href="/support">Contact us</a>
+                <a href="/terms">Terms</a>
+                <a href="/privacy">Privacy</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="hero-text">
+                <h1>Find every item at home in secs</h1>
+                <!-- CTA UPDATED FOR APP LAUNCH -->
+                <a href="https://apps.apple.com/pt/app/home-inventory-keepiko/id6743376808?l=en-GB" class="app-store-button" onclick="gtag('event', 'app_store_click');" target="_blank" rel="noopener noreferrer">
+                    <span class="app-store-logo"></span>
+                    <div class="app-store-text">
+                        <span class="app-store-text-top">Download on the</span>
+                        <span class="app-store-text-bottom">App Store</span>
+                    </div>
+                </a>
+            </div>
+            <div class="hero-images"><!-- Spacer --></div>
+            
+            <div class="mobile-only mobile-illustration-container">
+                <div class="illustration mobile-where-guy-mask">
+                    <img src="https://www.keepiko.com/images/where-guy.svg" alt="">
+                </div>
+                <img src="https://www.keepiko.com/images/iphone-illustration.svg" alt="" class="illustration mobile-iphone">
+            </div>
+        </main>
+        
+        <nav class="mobile-only mobile-nav">
+            <a href="/support">Contact us</a>
+            <a href="/terms">Terms</a>
+            <a href="/privacy">Privacy</a>
+        </nav>
+
+        <footer>
+            <hr class="footer-divider">
+            <p>© 2025 Keepiko. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- These illustrations are FOR DESKTOP ONLY -->
+    <p class="illustration dialog-text">Where is my lucky scarf 😩</p>
+    <img src="https://www.keepiko.com/images/dialog-bubble.svg" alt="Dialog bubble" class="illustration dialog-bubble">
+    <div class="illustration-group">
+        <img src="https://www.keepiko.com/images/where-guy.svg" alt="Confused person" class="illustration where-guy">
+        <img src="https://www.keepiko.com/images/iphone-illustration.svg" alt="iPhone showing Keepiko app" class="illustration iphone-illustration">
+    </div>
+</body>
+</html>
