@@ -79,11 +79,17 @@
             text-decoration: none;
         }
         .mini-logo {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--btn-front), var(--block-base));
-            border-radius: 6px;
-        }
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;              /* iOS icon rounded corners */
+    object-fit: cover;               /* prevents stretching */
+    display: block;
+
+    /* makes PNG look like real iOS icon */
+    box-shadow:
+        0 1px 1px rgba(0,0,0,0.25),
+        inset 0 0 0 1px rgba(255,255,255,0.08);
+}
         
         nav.desktop-nav { display: flex; gap: 30px; }
         nav.desktop-nav a {
@@ -267,9 +273,10 @@
         <!-- 2. Header -->
         <header>
             <a href="/" class="logo-area">
-                <div class="mini-logo"></div>
-                <span>Block Slide</span>
-            </a>
+    <img src="images/blockslide-appstore-icon.png" alt="Block Slide icon" class="mini-logo">
+    <span>Block Slide</span>
+</a>
+
             <nav class="desktop-nav">
                 <a href="/contact">Contact</a>
                 <a href="/terms">Terms</a>
