@@ -149,24 +149,51 @@
 
         /* 2. The Main Green Button */
         .btn-layer-front {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: var(--btn-front); 
-            border-radius: 20px; /* Matches cornerRadius(20) */
-            
-            /* Center Content */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            
-            /* Typography */
-            color: white;
-            font-size: 28px; 
-            font-weight: 800; /* Extra Bold */
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: var(--btn-front); 
+    border-radius: 20px;
+
+    color: white;
+}
+
+/* ---- App Store badge layout ---- */
+.btn-layer-front.appstore-badge {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 0 22px;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.appstore-icon {
+    font-size: 34px;
+    line-height: 1;
+    transform: translateY(-1px);
+}
+
+.appstore-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.05;
+}
+
+.appstore-text-top {
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0.95;
+}
+
+.appstore-text-bottom {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+}
+
 
         /* --- FOOTER & MOBILE --- */
         footer {
@@ -250,18 +277,6 @@
         </div>
     </div>
 </button>
-            
-            <button class="game-button" onclick="startTutorial()">
-                <div class="btn-layer-back"></div>
-                <div class="btn-layer-front">
-                    <!-- Icon + Text -->
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 1 0 0-8c-2 0-4 1.33-6 4Z"></path>
-                    </svg>
-                    <span>Classic</span>
-                </div>
-            </button>
-        </main>
 
         <!-- Mobile Nav -->
         <nav class="mobile-nav">
