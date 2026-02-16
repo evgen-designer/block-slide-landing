@@ -129,9 +129,9 @@
     font-weight: 500;
     opacity: 0.9;
     letter-spacing: 0.4px;
-    margin-top: -10px;
+    margin-top: -32px;   /* pulls subtitle closer to logo */
+    margin-bottom: -10px; /* keeps button spacing nice */
 }
-
         /* --- PERFECT SWIFTUI BUTTON REPLICA --- */
         .game-button {
             position: relative;
@@ -315,7 +315,8 @@
                Styled to match the "START" button in your screenshot
             -->
 
-            <button class="game-button" onclick="gtag('event', 'app_store_click'); window.open('https://apps.apple.com/app/id6758521704','_blank','noopener');">
+            <button class="game-button" onclick="gtag('event','app_store_click'); window.open('https://apps.apple.com/app/id6758521704','_blank');">
+
     <div class="btn-layer-back"></div>
 
     <div class="btn-layer-front">
