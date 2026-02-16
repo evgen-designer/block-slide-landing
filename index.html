@@ -151,10 +151,19 @@
         .btn-layer-front {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background-color: var(--btn-front); 
+    background-color: var(--btn-front);
     border-radius: 20px;
 
+    /* Layout like Keepiko badge */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    /* IMPORTANT: stop the "START" styling */
     color: white;
+    text-transform: none;
+    letter-spacing: 0;
 }
 
 /* ---- App Store badge layout ---- */
@@ -269,13 +278,12 @@
     <div class="btn-layer-back"></div>
 
     <div class="btn-layer-front">
-        <span class="app-store-logo"></span>
-
-        <div class="app-store-text">
-            <span class="app-store-text-top">Download on the</span>
-            <span class="app-store-text-bottom">App Store</span>
-        </div>
-    </div>
+  <span class="app-store-logo"></span>
+  <div class="app-store-text">
+    <span class="app-store-text-top">Download on the</span>
+    <span class="app-store-text-bottom">App Store</span>
+  </div>
+</div>
 </button>
 
         <!-- Mobile Nav -->
